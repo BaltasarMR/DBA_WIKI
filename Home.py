@@ -84,14 +84,14 @@ if check_password():
                 
                 if directory.exists():
                     file = open(f'pages/{NomePagina}.py',"w",encoding='utf-8')
-                    file.write(f"""import streamlit as st
+                    file.write(f'''import streamlit as st
                     \nfrom PIL import Image 
-                    \nst.caption('''\n{DescricaoProblema}\n''') 
+                    \nst.caption("""\n{DescricaoProblema}\n""") 
                     \nimage= Image.open(f'imagens/{Imagem1.name}')
                     \nst.image(image)
                     \nimage1= Image.open(f'imagens/{Imagem2.name}')
                     \nst.image(image1)            
-                    \nst.code('''\n{ComandoSQL}''',language='sql')""")
+                    \nst.code("""\n{ComandoSQL}""",language='sql')''')
                     file.close()
 
         def CriarDOCSEMIMAGEM():
@@ -104,10 +104,10 @@ if check_password():
             else:    
                 if directory.exists():
                     file = open(f'pages/{NomePagina}.py',"w",encoding='utf-8')
-                    file.write(f"""import streamlit as st
+                    file.write(f'''import streamlit as st
                     \nfrom PIL import Image 
                     \nst.caption("""\n{DescricaoProblema}\n""")            
-                    \nst.code("""\n{ComandoSQL}""",language='sql')""")
+                    \nst.code("""\n{ComandoSQL}""",language='sql')''')
                     file.close()            
 
         if BotaoCriarDOC:
