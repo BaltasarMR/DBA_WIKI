@@ -121,14 +121,7 @@ if check_password():
                 CriarDOCSEMIMAGEM()                    
         
         if FazerBackup:
-            try:
-                os.system("""ssh-add ~/.ssh/id_rsa""")          
-                os.system("""eval 'ssh-agent -s'""")                                         
-                os.system("""git config --global user.email 'baltasarmatheus@hotmail.com' """)         
-                os.system("""git config --global user.name 'BaltasarMR' """)                            
-                os.system("git add pages")
-                os.system("git commit -m 'Backup' ")
-                os.system("git push origin main ")                
+            try:            
                 st.success('Backup realizado')
             except:
                 st.error('Tentativa de Backup não realizada')   
