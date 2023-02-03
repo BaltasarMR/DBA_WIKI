@@ -45,7 +45,7 @@ if check_password():
     with coluna2:
         ComImagem = st.checkbox('Anexar imagens?',value=True)
 
-    FazerBackup = st.checkbox('Fazer Backup')
+    FazerBackup = st.button('Fazer Backup')
 
     if CriarDocumentacao == True:
 
@@ -121,9 +121,13 @@ if check_password():
                 CriarDOCSEMIMAGEM()                    
         
         if FazerBackup:
-            st.write(os.system("git add ."))
-            st.write(os.system("git commit 'teste' "))
-
+            try:
+              os.system("git add Home.py")
+              os.system("git commit -m 'Backup' ")
+              #os.system("git push origin main ")
+              st.success('Backup realizado')
+            except:
+                st.error('Tentativa de Backup não realizada')   
     else:
 
         for diretorio,subpastas,arquivos in os.walk('./pages'):
