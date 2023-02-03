@@ -124,7 +124,7 @@ if check_password():
             try:
               os.system("git add Home.py")
               os.system("git commit -m 'Backup' ")
-              #os.system("git push origin main ")
+              os.system("git push origin main ")
               st.success('Backup realizado')
             except:
                 st.error('Tentativa de Backup não realizada')   
