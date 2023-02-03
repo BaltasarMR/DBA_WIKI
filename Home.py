@@ -106,8 +106,8 @@ if check_password():
                     file = open(f'pages/{NomePagina}.py',"w",encoding='utf-8')
                     file.write(f"""import streamlit as st
                     \nfrom PIL import Image 
-                    \nst.caption('''\n{DescricaoProblema}\n''')            
-                    \nst.code('''\n{ComandoSQL}''',language='sql')""")
+                    \nst.caption("""\n{DescricaoProblema}\n""")            
+                    \nst.code("""\n{ComandoSQL}""",language='sql')""")
                     file.close()            
 
         if BotaoCriarDOC:
