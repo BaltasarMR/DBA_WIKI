@@ -122,7 +122,13 @@ if check_password():
         
         if FazerBackup:
             try:
-              st.success('Backup realizado')
+                os.system("""ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts""")                         
+                os.system("""git config --global user.email 'baltasarmatheus@hotmail.com' """)         
+                os.system("""git config --global user.name 'BaltasarMR' """)                            
+                os.system("git add pages")
+                os.system("git commit -m 'Backup' ")
+                os.system("git push origin main ")                
+                st.success('Backup realizado')
             except:
                 st.error('Tentativa de Backup não realizada')   
     else:
