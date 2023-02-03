@@ -26,7 +26,7 @@ def check_password():
         st.text_input(
             "Password", type="password", on_change=password_entered, key="password"
         )
-        st.error("😕 Password incorrect")
+        st.error("😕 Senha incorreta")
         return False
     else:
         # Password correct.
@@ -37,8 +37,12 @@ if check_password():
     directory = Path('pages')
 
     st.title('Documentação DBA')
-
-    CriarDocumentacao = st.checkbox('Criar?',value=True)
+    
+    coluna1,coluna2 = st.columns(2)
+    with coluna1:
+        CriarDocumentacao = st.checkbox('Criar?',value=True)
+    with coluna2:
+        ComImagem = st.checkbox('Anexar imagens?',value=True)
 
     if CriarDocumentacao == True:
 
@@ -46,16 +50,20 @@ if check_password():
 
         DescricaoProblema = st.text_area('Descrição do Problema')
 
-        Imagem1 = st.file_uploader(label = "Primeira Imagem")
+        if ComImagem == True:  
+            Imagem1 = st.file_uploader(label = "Primeira Imagem")
+
+            
+            Imagem2 = st.file_uploader(label = "Segunda Imagem")
 
         ComandoSQL = st.text_area('Coloque o comando SQL utilizado')
-
-        Imagem2 = st.file_uploader(label = "Segunda Imagem")
 
         BotaoCriarDOC = st.button('Criar o DOC')
 
         def CriarDOC():
-            if DescricaoProblema == '':
+            if NomePagina == '':
+                st.error('**Você esqueceu de preencher o nome da página!!**')            
+            elif DescricaoProblema == '':
                 st.error('**Você esqueceu de colocar o problema!!**')
             elif ComandoSQL == '':
                 st.error('**Você esqueceu de colocar o comando para a solução!!**')
@@ -73,11 +81,12 @@ if check_password():
                 save_path2 = Path(save_folder, Imagem2.name)
                 with open(save_path2, mode='wb') as w:
                     w.write(Imagem2.getvalue())        
+                
                 if directory.exists():
                     file = open(f'pages/{NomePagina}.py',"w",encoding='utf-8')
                     file.write(f"""import streamlit as st
                     \nfrom PIL import Image 
-                    \nst.markdown('''<b>\n{DescricaoProblema}\n</b>''',unsafe_allow_html=True) 
+                    \nst.caption('''\n{DescricaoProblema}\n''') 
                     \nimage= Image.open(f'imagens/{Imagem1.name}')
                     \nst.image(image)
                     \nimage1= Image.open(f'imagens/{Imagem2.name}')
@@ -85,8 +94,28 @@ if check_password():
                     \nst.code('''\n{ComandoSQL}''',language='sql')""")
                     file.close()
 
+        def CriarDOCSEMIMAGEM():
+            if NomePagina == '':
+                st.error('**Você esqueceu de preencher o nome da página!!**')
+            elif DescricaoProblema == '':
+                st.error('**Você esqueceu de colocar o problema!!**')
+            elif ComandoSQL == '':
+                st.error('**Você esqueceu de colocar o comando para a solução!!**')
+            else:    
+                if directory.exists():
+                    file = open(f'pages/{NomePagina}.py',"w",encoding='utf-8')
+                    file.write(f"""import streamlit as st
+                    \nfrom PIL import Image 
+                    \nst.caption('''\n{DescricaoProblema}\n''')            
+                    \nst.code('''\n{ComandoSQL}''',language='sql')""")
+                    file.close()            
+
         if BotaoCriarDOC:
-            CriarDOC()
+            
+            if ComImagem == True:  
+                CriarDOC()
+            else:
+                CriarDOCSEMIMAGEM()                    
 
     else:
 
