@@ -122,7 +122,7 @@ if check_password():
         
         if FazerBackup:
             try:
-                os.system("""echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config""")                         
+                os.system("""ls""")                         
                 os.system("""git config --global user.email 'baltasarmatheus@hotmail.com' """)         
                 os.system("""git config --global user.name 'BaltasarMR' """)                            
                 os.system("git add pages")
