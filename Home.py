@@ -4,6 +4,7 @@ import shutil
 import os
 import pandas as pd
 
+
 def check_password():
     """Returns `True` if the user had the correct password."""
 
@@ -43,6 +44,8 @@ if check_password():
         CriarDocumentacao = st.checkbox('Criar?',value=True)
     with coluna2:
         ComImagem = st.checkbox('Anexar imagens?',value=True)
+
+    FazerBackup = st.checkbox('Fazer Backup')
 
     if CriarDocumentacao == True:
 
@@ -109,13 +112,17 @@ if check_password():
                     \nst.caption("""\n{DescricaoProblema}\n""")            
                     \nst.code("""\n{ComandoSQL}""",language='sql')''')
                     file.close()            
-
+      
         if BotaoCriarDOC:
             
             if ComImagem == True:  
                 CriarDOC()
             else:
                 CriarDOCSEMIMAGEM()                    
+        
+        if FazerBackup:
+            st.write(os.system("git add ."))
+            st.write(os.system("git commit 'teste' "))
 
     else:
 
