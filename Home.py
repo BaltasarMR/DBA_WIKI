@@ -3,6 +3,9 @@ from pathlib import Path
 import shutil
 import os
 import pandas as pd
+import zipfile
+import ftplib
+
 
 
 def check_password():
@@ -121,8 +124,13 @@ if check_password():
                 CriarDOCSEMIMAGEM()                    
         
         if FazerBackup:
-            try:            
-                st.success('Backup realizado')
+            try:                            
+                shutil.make_archive('backup', 'zip', './', 'pages')
+                st.success('Backup realizado')                
+                ftp = ftplib.FTP("n1platin.ddns.net")
+                ftp.login("suporte", "M@rgaridas332")
+                Arquivo = open('backup.zip','rb')
+                ftp.storbinary('STOR backup.zip',Arquivo)                
             except:
                 st.error('Tentativa de Backup não realizada')   
     else:
