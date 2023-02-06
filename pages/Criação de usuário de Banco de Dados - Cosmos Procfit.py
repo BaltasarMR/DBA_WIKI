@@ -6,11 +6,11 @@ st.caption("""
 Criação usuário de Banco de Dados Cosmos Procfit
 """) 
                     
-image= Image.open(f'imagens/exemplo_do_SQL.odt')
+image= Image.open(f'imagens/exemplo_do_SQL.png')
                     
 st.image(image)
                     
-image1= Image.open(f'imagens/criação_usuario_leitura.odt')
+image1= Image.open(f'imagens/criação_usuario_leitura.png')
                     
 st.image(image1)            
                     
